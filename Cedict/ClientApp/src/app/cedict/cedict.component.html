@@ -1,0 +1,105 @@
+<h1 id="tableLabel">Cedict</h1>
+
+<form
+  [formGroup]="formModel"
+  (ngSubmit)="onSubmit()"
+  class="form">
+  <div>
+    <mat-form-field class="full-width">
+      <mat-label>Look up:</mat-label>
+      <input matInput
+             id="searchString"
+             formControlName="searchString"
+             placeholder='Examples: "zhong1", "中国人", "China". Wildcard * at beginning or end is permitted.'/>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-checkbox id="characterSearch"
+                  formControlName="characterSearch">Multi-character search
+    </mat-checkbox>
+  </div>
+  <div>
+    <button type="submit"
+            [disabled]="formModel.invalid"
+            mat-raised-button
+            color="primary">Search
+    </button>
+  </div>
+</form>
+
+<table mat-table
+       [dataSource]="entries"
+       class="mat-elevation-z8"
+       [hidden]="!entries">
+
+  <!-- Traditional Column -->
+  <ng-container matColumnDef="traditional">
+    <th mat-header-cell
+        *matHeaderCellDef>Traditional
+    </th>
+    <td mat-cell
+        class="font-size-lg"
+        *matCellDef="let entry">{{entry.traditional}}</td>
+  </ng-container>
+
+  <!-- Simplified Column -->
+  <ng-container matColumnDef="simplified">
+    <th mat-header-cell
+        *matHeaderCellDef>Simplified
+    </th>
+    <td mat-cell
+        class="font-size-lg"
+        *matCellDef="let entry">{{entry.simplified}}</td>
+  </ng-container>
+
+  <!-- Pinyin Column -->
+  <ng-container matColumnDef="pinyin">
+    <th mat-header-cell
+        *matHeaderCellDef>Pinyin
+    </th>
+    <td mat-cell
+        *matCellDef="let entry">{{entry.pinyin}}</td>
+  </ng-container>
+
+  <!-- English Column -->
+  <ng-container matColumnDef="english">
+    <th mat-header-cell
+        *matHeaderCellDef>English
+    </th>
+    <td mat-cell
+        *matCellDef="let entry">{{entry.english}}</td>
+  </ng-container>
+
+  <tr mat-header-row
+      *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row
+      *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<!-- Pagination directive -->
+<mat-paginator [hidden]="!entries"
+               (page)="pageEvent = getData($event)"
+               [pageSize]="10"
+               [pageSizeOptions]="[10, 20, 50]"
+               showFirstLastButtons></mat-paginator>
+
+<!--<table class='table table-striped'-->
+<!--       aria-labelledby="tableLabel"-->
+<!--       *ngIf="entries">-->
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th>Traditional</th>-->
+<!--    <th>Simplified</th>-->
+<!--    <th>Pinyin</th>-->
+<!--    <th>English</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr *ngFor="let entry of entries">-->
+<!--    <td class="font-size-lg">{{ entry.traditional }}</td>-->
+<!--    <td class="font-size-lg">{{ entry.simplified }}</td>-->
+<!--    <td>{{ entry.pinyin }}</td>-->
+<!--    <td>{{ entry.english }}</td>-->
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
