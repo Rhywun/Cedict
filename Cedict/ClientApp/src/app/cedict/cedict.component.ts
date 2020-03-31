@@ -22,19 +22,24 @@ export class CedictComponent implements OnInit {
 
   constructor(fb: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.formModel = fb.group({
-      searchString: ['', Validators.required],
+      query: ['', Validators.required],
       characterSearch: false,
+      ignoreTones: false,
     });
     this.http = http;
     this.baseUrl = baseUrl;
   }
 
   getData(event: PageEvent) {
-    let searchString = this.formModel.get('searchString').value;
-    let type = this.formModel.get('characterSearch').value ? "c" : "s";
-    let url = this.baseUrl + `api/entries?query=${searchString}&type=${type}`;
+    let searchString = this.formModel.get('query').value;
+    let type = this.formModel.get('characterSearch').value;
+    let ignoreTones = this.formModel.get('ignoreTones').value;
+    let url = this.baseUrl + "api/entries"; // ?query=${searchString}&type=${type}`;
     console.log(url);
     let params = new HttpParams()
+      .set("query", searchString)
+      .set("type", type)
+      .set("ignoreTones", ignoreTones)
       .set("pageIndex", event.pageIndex.toString())
       .set("pageSize", event.pageSize.toString());
     this.http.get<any>(url, {params})

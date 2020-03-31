@@ -25,7 +25,16 @@ namespace Cedict
 			services.AddDbContext<CedictContext>(
 				options => options.UseSqlite(
 					Configuration.GetConnectionString("DefaultConnection")));
-			services.AddControllersWithViews();
+
+			services.AddControllersWithViews()
+			        .AddJsonOptions(options =>
+			         {
+				         // Set this option to TRUE to indent the JSON output
+				         options.JsonSerializerOptions.WriteIndented = true;
+
+				         // Set this option to NULL to use PascalCase instead of camelCase (default)
+				         // options.JsonSerializerOptions.PropertyNamingPolicy = null;
+			         });
 
 			// In production, the Angular files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>

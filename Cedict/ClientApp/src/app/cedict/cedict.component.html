@@ -9,14 +9,21 @@
       <mat-form-field class="full-width">
         <mat-label>Look up:</mat-label>
         <input matInput
-               id="searchString"
-               formControlName="searchString"
+               id="query"
+               formControlName="query"
                placeholder='Examples: "zhong1", "中国人", "China". Wildcard * at beginning or end is permitted.'/>
       </mat-form-field>
     </div>
     <div>
       <mat-checkbox id="characterSearch"
+                    color="primary"
                     formControlName="characterSearch">Multi-character search - returns matches for each Chinese character
+      </mat-checkbox>
+    </div>
+    <div>
+      <mat-checkbox id="ignoreTones"
+                    color="primary"
+                    formControlName="ignoreTones">Ignore tones
       </mat-checkbox>
     </div>
     <div>
@@ -28,6 +35,9 @@
     </div>
   </form>
 </mat-card>
+
+<!-- TODO: Add column sorting and filtering -->
+<!-- TODO: Add data cell formatting: don't break, left align, etc. -->
 
 <table mat-table
        [dataSource]="entries"
@@ -84,24 +94,3 @@
                [pageSize]="10"
                [pageSizeOptions]="[10, 20, 50]"
                showFirstLastButtons></mat-paginator>
-
-<!--<table class='table table-striped'-->
-<!--       aria-labelledby="tableLabel"-->
-<!--       *ngIf="entries">-->
-<!--  <thead>-->
-<!--  <tr>-->
-<!--    <th>Traditional</th>-->
-<!--    <th>Simplified</th>-->
-<!--    <th>Pinyin</th>-->
-<!--    <th>English</th>-->
-<!--  </tr>-->
-<!--  </thead>-->
-<!--  <tbody>-->
-<!--  <tr *ngFor="let entry of entries">-->
-<!--    <td class="font-size-lg">{{ entry.traditional }}</td>-->
-<!--    <td class="font-size-lg">{{ entry.simplified }}</td>-->
-<!--    <td>{{ entry.pinyin }}</td>-->
-<!--    <td>{{ entry.english }}</td>-->
-<!--  </tr>-->
-<!--  </tbody>-->
-<!--</table>-->
