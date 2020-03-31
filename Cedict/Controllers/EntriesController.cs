@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Cedict.Models;
 using LinqKit;
@@ -59,8 +58,7 @@ namespace Cedict.Controllers
 			}
 		}
 
-		private static Expression<Func<Entry, bool>> GetStandardPredicate(
-			string query)
+		private static Expression<Func<Entry, bool>> GetStandardPredicate(string query)
 		{
 			query = query.ToUpper();
 			var pred = PredicateBuilder.New<Entry>(true);
@@ -119,25 +117,5 @@ namespace Cedict.Controllers
 
 			return predicate;
 		}
-
-		// TODO: Consider using this method to remove whitespace and tones from Pinyin input
-		private static string StripPinyin(string s)
-			=> Regex.Replace(s, @"", "");
-
-		/*
-		public ActionResult<IEnumerable<Entry>> GetEntries(string query,
-		                                                   string type      = "s",
-		                                                   int    pageIndex = 0,
-		                                                   int    pageSize  = 10)
-		{
-		    if (type != "s" && type != "c")
-		    {
-		        return BadRequest();
-		    }
-
-		    var entries = _service.GetEntries(query, type, pageIndex, pageSize);
-		    return Ok(entries);
-		}
-		*/
 	}
 }

@@ -1,31 +1,33 @@
-<h1 id="tableLabel">Cedict</h1>
-
-<form
-  [formGroup]="formModel"
-  (ngSubmit)="onSubmit()"
-  class="form">
-  <div>
-    <mat-form-field class="full-width">
-      <mat-label>Look up:</mat-label>
-      <input matInput
-             id="searchString"
-             formControlName="searchString"
-             placeholder='Examples: "zhong1", "中国人", "China". Wildcard * at beginning or end is permitted.'/>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-checkbox id="characterSearch"
-                  formControlName="characterSearch">Multi-character search
-    </mat-checkbox>
-  </div>
-  <div>
-    <button type="submit"
-            [disabled]="formModel.invalid"
-            mat-raised-button
-            color="primary">Search
-    </button>
-  </div>
-</form>
+<mat-card class="form">
+  <mat-card-title>Cedict</mat-card-title>
+  <mat-card-subtitle>Chinese-English Dictionary Lookup</mat-card-subtitle>
+  <form
+    [formGroup]="formModel"
+    (ngSubmit)="onSubmit()"
+    class="form">
+    <div>
+      <mat-form-field class="full-width">
+        <mat-label>Look up:</mat-label>
+        <input matInput
+               id="searchString"
+               formControlName="searchString"
+               placeholder='Examples: "zhong1", "中国人", "China". Wildcard * at beginning or end is permitted.'/>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-checkbox id="characterSearch"
+                    formControlName="characterSearch">Multi-character search - returns matches for each Chinese character
+      </mat-checkbox>
+    </div>
+    <div>
+      <button type="submit"
+              [disabled]="formModel.invalid"
+              mat-raised-button
+              color="primary">Search
+      </button>
+    </div>
+  </form>
+</mat-card>
 
 <table mat-table
        [dataSource]="entries"
