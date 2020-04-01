@@ -23,8 +23,8 @@ namespace Cedict.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // TODO: Comment me to disable logging
-            optionsBuilder.UseLoggerFactory(MyLoggerFactory);
+            // TODO: (Un)comment me to toggle logging
+            // optionsBuilder.UseLoggerFactory(MyLoggerFactory);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

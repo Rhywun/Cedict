@@ -6,6 +6,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatCardModule} from "@angular/material/card";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import {MatCardModule} from "@angular/material/card";
     MatButtonModule,
     MatGridListModule,
     MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    MatSortModule,
   ],
   exports: [
     MatTableModule,
@@ -24,7 +26,8 @@ import {MatCardModule} from "@angular/material/card";
     MatButtonModule,
     MatGridListModule,
     MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    MatSortModule,
   ]
 })
 export class AngularMaterialModule {

@@ -17,13 +17,13 @@
     <div>
       <mat-checkbox id="characterSearch"
                     color="primary"
-                    formControlName="characterSearch">Multi-character search - returns matches for each Chinese character
+                    formControlName="characterSearch">Multi-character search: combines matches for each Chinese character
       </mat-checkbox>
     </div>
     <div>
       <mat-checkbox id="ignoreTones"
                     color="primary"
-                    formControlName="ignoreTones">Ignore tones
+                    formControlName="ignoreTones">Ignore tones in Pinyin: searching for 'zi' returns 'zi1', 'zi2', 'zi3', etc.
       </mat-checkbox>
     </div>
     <div>
@@ -36,17 +36,21 @@
   </form>
 </mat-card>
 
-<!-- TODO: Add column sorting and filtering -->
 <!-- TODO: Add data cell formatting: don't break, left align, etc. -->
 
 <table mat-table
        [dataSource]="entries"
        class="mat-elevation-z8"
-       [hidden]="!entries">
+       [hidden]="!entries"
+       matSort
+       (matSortChange)="loadData()"
+       matSortActive="{{defaultSortColumn}}"
+       matSortDirection="{{defaultSortOrder}}">
 
   <!-- Traditional Column -->
   <ng-container matColumnDef="traditional">
     <th mat-header-cell
+        mat-sort-header
         *matHeaderCellDef>Traditional
     </th>
     <td mat-cell
@@ -57,6 +61,7 @@
   <!-- Simplified Column -->
   <ng-container matColumnDef="simplified">
     <th mat-header-cell
+        mat-sort-header
         *matHeaderCellDef>Simplified
     </th>
     <td mat-cell
@@ -67,6 +72,7 @@
   <!-- Pinyin Column -->
   <ng-container matColumnDef="pinyin">
     <th mat-header-cell
+        mat-sort-header
         *matHeaderCellDef>Pinyin
     </th>
     <td mat-cell
@@ -76,6 +82,7 @@
   <!-- English Column -->
   <ng-container matColumnDef="english">
     <th mat-header-cell
+        mat-sort-header
         *matHeaderCellDef>English
     </th>
     <td mat-cell
